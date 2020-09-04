@@ -76,11 +76,11 @@
                     </div>
                 </div>
             </header>
-             <div class="home-back">
+             <!-- <div class="home-back">
             <a href="https://mms2.yantra24x7.com/"><span ><mat-icon class="back">arrow_back</mat-icon></span>Back</a>
            <button (click)="logout()">Logout</button>
-          </div>
-          <div class="col clock_all">
+          </div> -->
+          <!-- <div class="col clock_all">
             <div class="clock_top">
               <span>Date:</span>
               {{today | date:'dd-MM-yyyy'}}
@@ -89,7 +89,7 @@
               <span>Time:</span>
               {{today | date:'h:mm:ss a'}}
             </div>
-          </div>
+          </div> -->
             <!-- *ngFor="let country of countries" value= {{country.id}} -->
             <div class="container-fluid">
               <div class="file-path">
@@ -178,37 +178,37 @@
                         <div class="container">
                           <div class="row">
                             <div class="col-md-6">
-                              <div class="input-label">
+                              <!-- <div class="input-label">
                               <label class='home-label'>Changed By</label>
                               <mat-form-field>
                                   <input matInput formControlName="name" type="text" placeholder="Enter Your Name" required>
                                   
                                 </mat-form-field>
-                            </div>
+                            </div> -->
                             
-                            <div>
+                            <!-- <div>
                               <label class='home-label'>Date</label>
                               <mat-form-field>
                                   <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]='date' (dateChange)='change($event)' (click)="picker.open()"   [max]="maxDate" [ngModelOptions]="{standalone: true}">
                                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                  <mat-datepicker #picker></mat-datepicker>
                               </mat-form-field>
-                            </div>
+                            </div> -->
                             
-                            <div class="input-label">
+                            <!-- <div class="input-label">
                               <label class='home-label'>Old Revision Number</label>
                               <mat-form-field>
                                   <input matInput formControlName="old_revision_no" type="text"  (keypress)="keyPress($event)"   placeholder="Enter Your Old Revision Number" required>
                             </mat-form-field>
-                          </div>
+                          </div> -->
                             </div>
                             <div class="col-md-6">
-                              <div class="input-label">
+                              <!-- <div class="input-label">
                               <label class='home-label'>New Revision Number</label>
                               <mat-form-field>
                                     <input matInput formControlName="new_revision_no" (keypress)="keyPress($event)"   type="text" placeholder="Enter Your New Revision Number" required>
                               </mat-form-field>
-                            </div>
+                            </div> -->
                             <div class="input-label">
                               <label class='home-label'>Reason</label>
                               <mat-form-field >
