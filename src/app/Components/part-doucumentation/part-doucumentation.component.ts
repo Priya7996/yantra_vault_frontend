@@ -3,6 +3,7 @@ import { NavbarService} from '../../Nav/navbar.service';
 import { PartService} from '../../Service/app/part.service';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-part-doucumentation',
@@ -125,16 +126,27 @@ onNoClick(): void {
   templateUrl: 'delete.html',
 })
 export class Delete {
-   
-  constructor(private service:PartService,public dialogRef: MatDialogRef<Delete>,@Inject(MAT_DIALOG_DATA) public data: any) {
+  login:FormGroup;
+  constructor(private fb:FormBuilder,private service:PartService,public dialogRef: MatDialogRef<Delete>,@Inject(MAT_DIALOG_DATA) public data: any) {
     
     }
 
  
-  ngOnInit(){}
+  ngOnInit(){
+    this.login = this.fb.group({
+      
+      id:["",],
+      customer_name:["",],
+      job_name:["",],
+    })
+  }
 
+logintest(){
+  console.log(this.login.value)
+}
 
-
-
+onNoClick(): void {
+  this.dialogRef.close();
+}
 
 }

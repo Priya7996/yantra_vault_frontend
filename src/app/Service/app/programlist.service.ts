@@ -17,7 +17,7 @@ export class  ProgramListService {
   }
   file_upload(value):Observable<any>{ 
     console.log(value)
-    return this.http.post('file_upload',value)
+    return this.http.post('file_upload',value,)
   }
  
   display_reason(id):Observable<any>{
@@ -29,7 +29,7 @@ export class  ProgramListService {
   cnc_receive(val,ue):Observable<any>{
     return this.http.get('file_receive_from_cnc?file_name='+val + '&&machine_id=' + ue)
   }
-  delete(val):Observable<any>{
+  delete(val):Observable<any>{ 
     
      return this.http.post('file_delete',val)
   }

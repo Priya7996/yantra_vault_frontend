@@ -326,7 +326,7 @@ console.log(localStorage.getItem("token"))
       me.handleChange('right', me.filetext1)
     }
     //this.handleChange('right',right)
-    this.Text1 = me.filetext1
+    this.Text1 = me.filetext1 
   }
   logintest(val) {
     console.log(this.date)
