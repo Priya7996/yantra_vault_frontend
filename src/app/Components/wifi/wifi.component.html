@@ -4,7 +4,7 @@
         <mat-card-content>
         
           <p class="mb_space"> Wifi Configuration</p>
-          <form [formGroup]="login"  (ngSubmit)="logintest(login.value)" autocomplete="off" class="login_form">
+          <form [formGroup]="login"  (ngSubmit)="logintest()" autocomplete="off" class="login_form">
             <mat-form-field class="form">
               <mat-label>Network Name</mat-label>
               <input matInput formControlName="user_name" type="text" required>
@@ -30,13 +30,41 @@
   <h3>Wifi Name List:{{scanning}}</h3>
          
  
-
+<!-- <h2>{{retryMessage}}</h2>  -->
 
 </mat-card-content>
+<!-- 
+<button mat-button (click)="openDialogWithRef(gokul_test)">Open dialog with reference</button>
+
+<ng-template  #gokul_test>
+  <h2 matDialogTitle>Hello, world!</h2>
+  <p matDialogContent><em>Content for this dialog goes here...</em></p>
+  <mat-dialog-actions align="end">
+    <button mat-button matDialogClose>Dismiss</button>
+  </mat-dialog-actions>
+</ng-template> -->
+
+
       </mat-card>
 
       
+
     </div>
+
+    <mat-card class="card2"  *ngIf="gokul_test == true" >
+
+      <div >
+               
+        <h2>Wait untill system reboot</h2>
+        <div ><h2>
+         {{retryMessage}}sec</h2>
+        </div>
+      </div>
+      
+      </mat-card>
+
+    
+     
   </section>
   
   

@@ -23,7 +23,7 @@ export class OperatorAllocationComponent implements OnInit {
   get_report: any;
   IsVisible: boolean;
   subid: any;
-
+  search:any;
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -198,7 +198,22 @@ export class New {
   tenant: string;
   dialogRef: any;
   login: any;
-  
+  daterangepicker:any;
+  public today: Date = new Date(new Date().toDateString());
+  public weekStart: Date = new Date(new Date(new Date().setDate(new Date().getDate() - (new Date().getDay() + 7) % 7)).toDateString());
+  public weekEnd: Date = new Date(new Date(new Date().setDate(new Date(new Date().setDate((new Date().getDate()
+      - (new Date().getDay() + 7) % 7))).getDate() + 6)).toDateString())
+      ;
+  public monthStart: Date = new Date(new Date(new Date().setDate(1)).toDateString());
+  public monthEnd: Date = this.today;
+  public lastStart: Date = new Date(new Date(new Date(new Date().setMonth(new Date().getMonth() - 1)).setDate(1)).toDateString());
+  public lastEnd: Date = this.today;
+  public yearStart: Date = new Date(new Date(new Date().setDate(new Date().getDate() - 365)).toDateString());
+  public yearEnd: Date = this.today;
+  public currentYear: number = this.today.getFullYear();
+  public currentMonth: number = this.today.getMonth();
+  public maxDate: Object = new Date();
+  public minDate: Object = new Date(new Date().setMonth(new Date().getMonth() - 1));
   constructor(private service:OperatorAllocationService,private fb:FormBuilder) {
     this.tenant=localStorage.getItem('tenant_id')
   }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Directive,OnInit, EventEmitter, Output, OnDestroy, Input,ElementRef,Renderer } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatButtonModule,MatMenuModule,MatIconModule,MatInputModule,MatCardModule,MatFormFieldModule,MatListModule,
@@ -12,6 +12,8 @@ import { MatButtonModule,MatMenuModule,MatIconModule,MatInputModule,MatCardModul
 import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { MatNativeDateModule } from '@angular/material/core';
+// import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+// import { Tokentinterceptor} from '../../Service/core/http/tokentinterceptor';
 
 
 @NgModule({
@@ -22,7 +24,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatSidenavModule,MatDividerModule,MatNativeDateModule,MatRadioModule
     ,MatExpansionModule,MatGridListModule,MatStepperModule,MatTooltipModule,
     MatTreeModule,MatButtonToggleModule,MatSnackBarModule,MatTabsModule,
-    MatDialogModule,MatTableModule,MatDatepickerModule,MatCheckboxModule,
+    MatDialogModule,MatTableModule,MatDatepickerModule,MatCheckboxModule, 
     CommonModule,DateRangePickerModule,MatToolbarModule,MatPaginatorModule,AngularFontAwesomeModule
   ],
   exports:[FormsModule, ReactiveFormsModule,MatButtonModule,MatMenuModule,
@@ -31,8 +33,17 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatSidenavModule,MatDividerModule,MatNativeDateModule,MatRadioModule
     ,MatExpansionModule,MatGridListModule,MatStepperModule,MatTooltipModule,
     MatTreeModule,MatButtonToggleModule,MatSnackBarModule,MatTabsModule,
-    MatDialogModule,MatTableModule,MatDatepickerModule,MatCheckboxModule,
+    MatDialogModule,MatTableModule,MatDatepickerModule,MatCheckboxModule, 
     CommonModule,DateRangePickerModule,MatToolbarModule,MatPaginatorModule,AngularFontAwesomeModule
-  ]
+  ],
+
+  // providers: [
+  //   {
+  //     provide:HTTP_INTERCEPTORS,
+  //     useClass:Tokentinterceptor,
+  //     multi:true,
+  //   }
+  // ],
+
 })
 export class SharedModule { }

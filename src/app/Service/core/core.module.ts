@@ -1,29 +1,33 @@
-import { NgModule, SkipSelf, Optional } from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthGuard} from '../core/authentication/auth.guard';
-import { TokenService} from '../core/authentication/token.service';
-// import { Tokentinterceptor} from '../core/http/tokentinterceptor';
-// import { HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import {  RouterModule } from '@angular/router';
+import { SuccessErrorHandlerInterceptor } from './http/success-error-handler.interceptor';
+import { AuthGuard } from '../core/authentication/auth.guard';
+import { ApiPrefixInterceptor } from '../core/http/api-prefix.interceptor';
+import { TokenService } from '../core/authentication/token.service';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule, RouterModule, HttpClientModule],
   providers: [
     AuthGuard,
+    ApiPrefixInterceptor,
+    SuccessErrorHandlerInterceptor,
     TokenService,
-   // Tokentinterceptor,
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: Tokentinterceptor,
-    //   multi: true
-    // }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiPrefixInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SuccessErrorHandlerInterceptor,
+      multi: true
+    }
   ]
 })
-export class CoreModule { 
+export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
     // Import guard
     if (parentModule) {

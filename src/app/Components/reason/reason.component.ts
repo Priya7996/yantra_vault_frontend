@@ -16,7 +16,7 @@ export class ReasonComponent implements OnInit {
   public dolly = (value: string) => {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
-
+  searchText:any;
   tenant: any;
   reason_response: any;
   reason: any;

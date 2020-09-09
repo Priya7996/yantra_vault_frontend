@@ -109,7 +109,7 @@ export class Edit {
   add_val:any;
   constructor(public dialogRef: MatDialogRef<Edit>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,public service :OperatorService) {}
 
-  cancel() {
+  onNoClick(): void {
     this.dialogRef.close();
   }
 

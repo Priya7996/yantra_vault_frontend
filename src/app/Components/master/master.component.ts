@@ -7,6 +7,7 @@ import {ProgramListService} from '../../Service/app/programlist.service';
 import { MatTableDataSource } from '@angular/material';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { saveAs } from 'file-saver';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Component({
@@ -46,7 +47,7 @@ export class MasterComponent implements OnInit {
   user:any;
   add_value:any;
   id:any;
-  constructor(private fb:FormBuilder,public dialog: MatDialog,private nav:NavbarService,private service:ProgramListService) {
+  constructor(private http: HttpClient,private fb:FormBuilder,public dialog: MatDialog,private nav:NavbarService,private service:ProgramListService) {
     this.nav.show();
     this.tenant = localStorage.getItem('tenant_id')
     this.id = localStorage.getItem('machine_id')
@@ -60,13 +61,16 @@ export class MasterComponent implements OnInit {
 
    slavelist: string[] = ['position', 'name', 'weight', 'symbol','action'];
   
-  openDialog(): void {
+  openDialog(machine): void {
     const dialogRef = this.dialog.open(Dialog, {
       width: '250px',
+      data: { edit_shift: machine}
+
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.ngOnInit();
     });
   }
 
@@ -77,6 +81,7 @@ export class MasterComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.ngOnInit();
     });
   }
 
@@ -105,7 +110,7 @@ export class MasterComponent implements OnInit {
 
     this.service.cnc_upload(demo,this.machine_id).pipe(untilDestroyed(this)).subscribe(res =>{
       console.log(res);
-      alert(res.status)
+      Swal.fire(res.status)
       location.reload()
     })
   }
@@ -129,7 +134,7 @@ console.log(res);
    });
 
    var data = "text/json;charset=utf-8," + encodeURIComponent(data);
-  saveAs(file, scotch.file_name + ".json");
+  saveAs(file, scotch.file_name );
       
     
     })
@@ -159,7 +164,7 @@ console.log(res);
         });
      
         var data = "text/json;charset=utf-8," + encodeURIComponent(data);
-       saveAs(file, scotch.file_name + ".json");
+       saveAs(file, scotch.file_name );
            
          
          })
@@ -178,7 +183,7 @@ console.log(res);
 
     this.service.cnc_receive(val,this.machine_id).pipe(untilDestroyed(this)).subscribe(res =>{
       console.log(res);
-      alert(res.status)
+      Swal.fire(res.status)
       location.reload()
     })
   }
@@ -225,9 +230,14 @@ export class Dialog {
   file2:any;
   machine_id:any;
   daterangepicker:any;
-  constructor(public dialogRef: MatDialogRef<Dialog>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,private service:ProgramListService) {
+  value:any;
+  status:any;
+  add_val:any;
+  constructor(private http: HttpClient,public dialogRef: MatDialogRef<Dialog>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,private service:ProgramListService) {
   this.tenant = localStorage.getItem('tenant_id')  
   this.machine_id = localStorage.getItem('machine_id')
+  this.value = data;
+  console.log(this.value)
   console.log(this.machine_id )
   }
 
@@ -235,7 +245,7 @@ export class Dialog {
     this.dialogRef.close();
   }
 
-  fileUpload1(event){
+  fileUpload1(event){ 
     this.file2 = event.target.files[0];
     console.log(this.file2);
    
@@ -244,7 +254,7 @@ export class Dialog {
   ngOnInit()
   {
     this.test=this.fb.group ({
-      machine_id:["",],
+      machine_id:[this.value.edit_shift],
       revision_no:["",],
 
     })
@@ -257,18 +267,33 @@ export class Dialog {
 
   }
   
-  logintest()
-  {
-    console.log(this.test.value);
+  logintest(){
+    this.add_val = this.test.value ;
+    this.add_val = this.value.edit_shift;
+ 
+
+    let headers = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer " + localStorage.getItem("token")
+      })
+    }  
+    console.log(this.add_val);
     console.log(this.file2);
     var fd = new FormData();
-    fd.append('id', this.test.value.machine_id);
+    fd.append('machine_id', this.test.value.machine_id);
     fd.append('revision_no','1');
     fd.append('file',this.file2);
-    console.log(fd);
+    console.log(fd,"file name");
 
-    this.service.file_upload(fd).pipe(untilDestroyed(this)).subscribe(res =>{
-      console.log(res)
+    this.http.post("http://192.168.0.237:4000/api/v1/file_upload",fd, { headers: { Authorization: "Bearer " + localStorage.getItem("token") } }).subscribe(res =>{
+      
+      if (res['status'] != null) {
+        Swal.fire(res['status'])
+      }
+      this.dialogRef.close();
+
+
 
     })
 
@@ -293,6 +318,9 @@ export class Delete {
   machine_id:any;
   login:FormGroup;
   add_val: any;  
+  startDate = new Date(2020, 0, 1);
+  maxDate:any;
+  minDate:any;
   constructor(private service:ProgramListService,public dialogRef: MatDialogRef<Delete>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder) {
     this.machine_id = localStorage.getItem('machine_id')
     console.log(this.machine_id )

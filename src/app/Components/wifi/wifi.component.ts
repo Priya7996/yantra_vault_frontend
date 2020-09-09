@@ -5,6 +5,9 @@ import { NavbarService } from '../../Nav/navbar.service';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 // import Swal from 'sweetalert2';
 import { Observable } from "rxjs/Observable";
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2'
+
 import { timer } from 'rxjs';
 import 'rxjs/add/observable/interval';
 import "rxjs/add/observable/timer";
@@ -18,10 +21,12 @@ import "rxjs/add/operator/map";
 })
 export class WifiComponent implements OnInit {
   login: FormGroup;
-  hide: boolean = true; 
+  hide: boolean = true;
+  gokul_test= false; 
   scanning:any;
- 
-  constructor(private fb: FormBuilder, private nav: NavbarService, private service: WifiService, ) {
+  retryMessage:any;
+  status:any;
+  constructor(private route:Router,private fb: FormBuilder, private nav: NavbarService, private service: WifiService, ) {
     this.nav.show();
   }
 
@@ -35,13 +40,53 @@ export class WifiComponent implements OnInit {
     })
   }
   logintest() {
-    console.log(this.login.value)
+    let times = -60;
+    setInterval(() => {
+      this.gokul_test = true;
+      console.log("start")
+    
+      this.retryMessage = times++;
+    }, 1000);
+
+    setInterval(() => {
+     this.route.navigateByUrl('');
+
+      this.gokul_test = true;
+      console.log("completed")
+    }, 60000);
+
+   
      var data = this.login.value.user_name;
-     console.log(data);
      var data1 = this.login.value.password;
-     console.log(data1)
     this.service.submit(data,data1).pipe(untilDestroyed(this)).subscribe(res =>{
-      console.log(res)
+      console.log(status);
+      Swal.fire(res['status'])
+      let times = -60;
+      setInterval(() => {
+        this.gokul_test = true;
+        console.log("start")
+      
+        this.retryMessage = times++;
+      }, 1000);
+  
+      setInterval(() => {
+       this.route.navigateByUrl('');
+  
+        this.gokul_test = true;
+        console.log("completed")
+      }, 60000);
+
+
+     
+
+
+// $timeout(function () {
+
+// $window.location = '/#!/login';
+
+// }, 60000);
+
+                // }
     })
   }
   wifi(){
@@ -49,11 +94,9 @@ export class WifiComponent implements OnInit {
       console.log(res);
       this.scanning = res.wifi_name_list;
       console.log(this.scanning)
-      
-    })
-  
-
     
+
+    })
    
   }
 

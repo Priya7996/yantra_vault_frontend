@@ -7,7 +7,7 @@
     </mat-toolbar>
     <div class="dialog-form">
         <div class="filter_sec">
-            <form [formGroup]="test" (ngSubmit)="testform()" class="form_sec" autocomplete="off">
+            <form [formGroup]="test" (ngSubmit)="testform(test.value)" class="form_sec" autocomplete="off">
                 <mat-form-field>
                     <mat-label>Email Id</mat-label>
                     <input matInput formControlName="email_id" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"

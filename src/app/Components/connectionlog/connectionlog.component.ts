@@ -12,7 +12,8 @@ export class ConnectionlogComponent implements OnInit {
   displayedColumns: string[] = ['position','date','time','status'];
   displayedColumns1: string[] = ['position','date','time','machinename','status'];
   powerconnected:string[] = ['position','date','time','status']
-
+  search:any;
+  Connected:any;
   dataSource = new MatTableDataSource();
   dataSource1 = new MatTableDataSource();
   power = new MatTableDataSource();

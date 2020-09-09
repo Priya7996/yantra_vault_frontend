@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterModule } from './Components/register/register.module';
 import { SharedModule} from './Components/shared/shared.module';
 import { NavbarService} from './Nav/navbar.service';
-import { Tokentinterceptor} from '../app/Service/core/http/tokentinterceptor';
+// import { Tokentinterceptor} from '../app/Service/core/http/tokentinterceptor';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule} from '../app/Service/core/core.module';
@@ -29,12 +29,7 @@ import { CoreModule} from '../app/Service/core/core.module';
     CoreModule
     
   ],
-  providers: [NavbarService,
-  {
-    provide:HTTP_INTERCEPTORS,
-    useClass:Tokentinterceptor,
-    multi:true,
-  }],
+  providers: [NavbarService],
   bootstrap: [AppComponent],
   entryComponents:[editComponent],
 

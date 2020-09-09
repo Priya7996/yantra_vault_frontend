@@ -6,9 +6,11 @@ import { MachineStatusService } from '../../Service/app/machine-status.service';
   styleUrls: ['./machine-status.component.scss']
 })
 export class MachineStatusComponent implements OnInit {
+  searchText:any;
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = [
   ];
+  
   
   constructor(private service:MachineStatusService) { }
 

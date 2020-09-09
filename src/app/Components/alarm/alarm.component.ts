@@ -17,8 +17,11 @@ export class AlarmComponent implements OnInit {
   pageEvent: PageEvent;
   length:any;
   page_size:any = 20;
+  searchText:any;
+  search:any;
   pageSizeOptions: number[] = [20];
   tenant:any;
+  pageSize:any;
   alarm:any;
   pageNo: any;
   count: any;

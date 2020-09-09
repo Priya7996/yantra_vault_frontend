@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material';
 import Swal from 'sweetalert2';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { saveAs } from 'file-saver';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-backup',
@@ -30,13 +31,15 @@ export class BackupComponent implements OnInit {
   }
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol','action'];
   dataSource = new MatTableDataSource();
-  openDialog(): void {
+  openDialog(machine): void {
     const dialogRef = this.dialog.open(Backup, {
       width: '250px',
+      data: { edit_shift: machine}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.ngOnInit();
     });
   }
   ngOnInit() {
@@ -86,7 +89,7 @@ export class BackupComponent implements OnInit {
       });
    
       var data = "text/json;charset=utf-8," + encodeURIComponent(data);
-     saveAs(file, scotch.file_name + ".json");
+     saveAs(file, scotch.file_name );
          
        
        })
@@ -112,12 +115,17 @@ export class Backup {
   baclog:any;
   tenant: any;
   user_id:any;
+  add_val:any;
   file2:any;
   machine_id:any;
-  constructor(public dialogRef: MatDialogRef<Backup>,@Inject(MAT_DIALOG_DATA) public data: string,private fb:FormBuilder,private service :BackupService) {
+  value:any;
+  status:any;
+  constructor(private http: HttpClient,public dialogRef: MatDialogRef<Backup>,@Inject(MAT_DIALOG_DATA) public data: string,private fb:FormBuilder,private service :BackupService) {
      this.tenant = localStorage.getItem('tenant_id')  
      this.user_id = localStorage.getItem('user_id')
-     console.log(this.user_id)
+     console.log(this.user_id);
+     this.value = data;
+     console.log(this.value)
   
   }
 
@@ -134,7 +142,7 @@ export class Backup {
   ngOnInit() {
 
     this.test=this.fb.group ({
-      machine_id:[""],
+      machine_id:[this.value.edit_shift],
       reason:[""],
 
     })
@@ -148,18 +156,28 @@ export class Backup {
   testform(val)
   { 
     console.log(val);
+    let headers = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer " + localStorage.getItem("token")
+      })
+    }  
+    this.add_val = val ;
+    this.add_val = this.value.edit_shift;
+
+    console.log(this.add_val);
     var fd = new FormData();
     fd.append('machine_id', this.test.value.machine_id);
     fd.append('reason', this.test.value.reason);
     fd.append('user_id',  this.user_id);
     fd.append('file', this.file2);
     console.log(fd)
-    fd.forEach((value, key) => {
-       console.log(key + value)
-      });
-
-      this.service.backup_folder(fd).pipe(untilDestroyed(this)).subscribe(res => {
-        console.log(res);
+   
+      this.http.post("http://192.168.0.237:4000/api/v1/backup_upload",fd, { headers: { Authorization: "Bearer " + localStorage.getItem("token") } }).subscribe(res =>{
+      if (res['status'] != null) {
+        Swal.fire(res['status'])
+      }
+      this.dialogRef.close();
     
   })
 }

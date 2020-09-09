@@ -237,7 +237,7 @@ console.log(localStorage.getItem("token"))
     // this.ngOnInit();
 
     // this.Compare = false;
-    console.log(this.Compare);
+    console.log(this.Compare); 
     let headers = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

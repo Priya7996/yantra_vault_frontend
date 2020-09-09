@@ -1,3 +1,32 @@
+
+ .overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+  }
+  div.centered {
+    width: 500px;
+    height: 400px;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    margin-top: -200px;
+    margin-left: -250px;
+}
+.card2{
+    margin-top: 150px;
+
+    height: 70%;
+    width: 80%;
+
+
+}
 .login_page{
     overflow: hidden;
     height: 100vh;

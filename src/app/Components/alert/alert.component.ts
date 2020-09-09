@@ -15,6 +15,7 @@ export class AlertComponent implements OnInit {
   dataSource = new MatTableDataSource();
   pageNo: any;
   page_size= 10;
+  searchText:any;
   myLoader = false;
   public dolly = (value: string) => {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
