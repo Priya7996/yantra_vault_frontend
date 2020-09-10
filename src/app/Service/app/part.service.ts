@@ -22,4 +22,8 @@ export class PartService {
   file_upload(val):Observable<any>{
     return this.http.post('part_doc_upload',val)
   }
+  option_edit(id,value)
+  {
+    return this.http.put('part_doc_edit/'+id,value)
+  }
 }

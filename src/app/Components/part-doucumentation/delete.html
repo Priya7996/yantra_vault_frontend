@@ -1,10 +1,11 @@
 
 <div>
-<form [formGroup]="login" (ngSubmit)="logintest()">
+<form [formGroup]="login" >
+    <!-- <p>Id</p>
+
     <mat-form-field>
-        <mat-label>Id</mat-label>
         <input matInput formControlName="id" type="text" readonly>
-    </mat-form-field>
+    </mat-form-field> -->
 
     <mat-form-field>
         <mat-label>Customer Name</mat-label>
@@ -17,7 +18,7 @@
         <input matInput formControlName="job_name" type="text">
     </mat-form-field>
 
-    <button mat-raise-button >Save</button>
+    <button mat-raise-button (click)="logintest()">Save</button>
     <button mat-raise-button (click)="onNoClick()">Close</button>
 
 </form>

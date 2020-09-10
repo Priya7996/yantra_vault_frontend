@@ -4,6 +4,8 @@ import { PartService} from '../../Service/app/part.service';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-part-doucumentation',
@@ -35,9 +37,11 @@ export class PartDoucumentationComponent implements OnInit {
   }
 
 
-  openDialog2(): void {
+  openDialog2(id,cname,jname): void {
     const dialogRef = this.dialog.open(Delete, {
       width: '250px',
+      data: {id: id,cuname:cname,joname:jname }
+
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -81,7 +85,7 @@ export class PartDoucumentationComponent implements OnInit {
 export class Dialog {
   file2:any;
   machine_id:any;
-  constructor(public dialogRef: MatDialogRef<Dialog>,@Inject(MAT_DIALOG_DATA) public data: any,private service:PartService) {
+  constructor(private http: HttpClient,public dialogRef: MatDialogRef<Dialog>,@Inject(MAT_DIALOG_DATA) public data: any,private service:PartService) {
     this.machine_id = localStorage.getItem('machine_id')
   console.log(this.machine_id )
   }
@@ -93,15 +97,29 @@ export class Dialog {
     
 }
 save(){
+
+  let headers = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer " + localStorage.getItem("token")
+    })
+  }  
   console.log(this.file2);
   var fd = new FormData()
 
   fd.append('file', this.file2);
   fd.append('id', this.machine_id);
   console.log(fd);
-  this.service.file_upload(fd).pipe(untilDestroyed(this)).subscribe(res =>{
-    console.log(res);
-  })
+    this.http.post("http://192.168.0.237:4000/api/v1/part_doc_upload",fd, { headers: { Authorization: "Bearer " + localStorage.getItem("token") } }).subscribe(res =>{
+      
+      if (res['status'] != null) {
+        Swal.fire(res['status'])
+      }
+      this.dialogRef.close();
+
+
+
+    })
 
 }
 onNoClick(): void {
@@ -127,26 +145,36 @@ onNoClick(): void {
 })
 export class Delete {
   login:FormGroup;
+  value:any;
   constructor(private fb:FormBuilder,private service:PartService,public dialogRef: MatDialogRef<Delete>,@Inject(MAT_DIALOG_DATA) public data: any) {
-    
+    this.value = data;
+   console.log(this.value)
     }
 
  
   ngOnInit(){
     this.login = this.fb.group({
       
-      id:["",],
-      customer_name:["",],
-      job_name:["",],
+      // id:[this.value.id],
+      customer_name:[this.value.cuname],
+      job_name:[this.value.joname],
     })
   }
 
 logintest(){
   console.log(this.login.value)
-}
+  this.service.option_edit(this.value.id,this.login.value).pipe(untilDestroyed(this)).subscribe(res =>{
+    console.log(res);
+  })}
 
 onNoClick(): void {
   this.dialogRef.close();
+}
+
+ngOnDestroy(){
+
+  
+ 
 }
 
 }
