@@ -32,7 +32,6 @@ export class PartDoucumentationComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 
@@ -45,7 +44,6 @@ export class PartDoucumentationComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 
@@ -65,7 +63,6 @@ export class PartDoucumentationComponent implements OnInit {
   code_compare(id) {
     this.service.display_reason(id).pipe(untilDestroyed(this)).subscribe(res =>{
       this.reason=res;
-      console.log(this.reason)
     })  
   }
 
@@ -87,12 +84,10 @@ export class Dialog {
   machine_id:any;
   constructor(private http: HttpClient,public dialogRef: MatDialogRef<Dialog>,@Inject(MAT_DIALOG_DATA) public data: any,private service:PartService) {
     this.machine_id = localStorage.getItem('machine_id')
-  console.log(this.machine_id )
   }
 
   fileUpload1(event){
     this.file2 = event.target.files[0];
-    console.log(this.file2);
    
     
 }
@@ -104,12 +99,10 @@ save(){
       'Authorization': "Bearer " + localStorage.getItem("token")
     })
   }  
-  console.log(this.file2);
   var fd = new FormData()
 
   fd.append('file', this.file2);
   fd.append('id', this.machine_id);
-  console.log(fd);
     this.http.post("http://192.168.0.237:4000/api/v1/part_doc_upload",fd, { headers: { Authorization: "Bearer " + localStorage.getItem("token") } }).subscribe(res =>{
       
       if (res['status'] != null) {
@@ -148,7 +141,6 @@ export class Delete {
   value:any;
   constructor(private fb:FormBuilder,private service:PartService,public dialogRef: MatDialogRef<Delete>,@Inject(MAT_DIALOG_DATA) public data: any) {
     this.value = data;
-   console.log(this.value)
     }
 
  
@@ -162,9 +154,7 @@ export class Delete {
   }
 
 logintest(){
-  console.log(this.login.value)
   this.service.option_edit(this.value.id,this.login.value).pipe(untilDestroyed(this)).subscribe(res =>{
-    console.log(res);
   })}
 
 onNoClick(): void {

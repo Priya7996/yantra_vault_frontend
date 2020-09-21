@@ -15,7 +15,6 @@ export class SidebarService {
   tenantId = this.token.getTenantID();
 
   editvalue(id,val):Observable<any>{
-    console.log(id,val)
     return this.http.put('users/'+id,val)
   }
 

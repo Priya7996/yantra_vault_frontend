@@ -30,7 +30,6 @@ export class FilepathComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.ngOnInit();
 
     });
@@ -44,7 +43,6 @@ export class FilepathComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.ngOnInit();
 
     });
@@ -52,7 +50,6 @@ export class FilepathComponent implements OnInit {
   ngOnInit() {
     this.myLoader = true;
 this.service.show_filepath(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
-  console.log(res);
   this.myLoader = false;
   this.result = res;
   this.dataSource = new MatTableDataSource(this.result);
@@ -60,7 +57,6 @@ this.service.show_filepath(this.tenant).pipe(untilDestroyed(this)).subscribe(res
 
   }
   filepath_delete(id){
-    console.log(id)
     Swal.fire({
       title: 'Are you sure want to delete?',
       // type: 'warning',
@@ -74,7 +70,6 @@ this.service.show_filepath(this.tenant).pipe(untilDestroyed(this)).subscribe(res
         }).then((destroy) => {
           if (destroy.value) {
             this.service.delete_row(id).pipe(untilDestroyed(this)).subscribe(res => {
-              console.log(res);
               if(res === true)
               {
                 Swal.fire("Deleted Succesfully !")
@@ -110,9 +105,10 @@ export class Popup {
   tenant: any;
   value:any;
   status:any
+  hide: boolean = true;
+
   constructor(private service:FilepathService,public dialogRef: MatDialogRef<Popup>,@Inject(MAT_DIALOG_DATA) public data: Popup,private fb:FormBuilder, private filepath: FilepathService) {
   //  this.value = data;
-  //  console.log(this.value)
     this.tenant=localStorage.getItem('tenant_id')
   
   }
@@ -145,19 +141,17 @@ export class Popup {
   //   }
   
   this.login = this.fb.group({
-    ip:["",],
+    ip:["",Validators.pattern('^[0-9]{10}$')],
     user_name:["",],
     pass:["",],
     master_location:["",],
     machine_id:["",]
   })
   this.filepath.tenant_id().pipe(untilDestroyed(this)).subscribe(res => {
-      console.log(res);
       this.filepath_response=res;
-      console.log(localStorage.getItem('token'));});
+     });
 
       this.service.machine(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
-      console.log(res);
   })
   }
   onSelect(id: any) {
@@ -165,7 +159,6 @@ export class Popup {
   }
   
   loginform() {
-    console.log(this.login.value);
 
     let scotch ={
       "ip": this.login.value.ip,
@@ -175,9 +168,7 @@ export class Popup {
       "master_location":"/home/part_program",
       "slave_location":"/home/part_program"
     }
-    console.log(scotch);
     this.filepath.popup(scotch).pipe(untilDestroyed(this)).subscribe(res => {
-       //console.log(res.status);
        Swal.fire(res['status'])
       
       this.dialogRef.close();
@@ -187,7 +178,6 @@ export class Popup {
       //this.myLoader = true;
 
       //this.filepath.popup(this.login.value).pipe(untilDestroyed(this)).subscribe(res => {
-        //console.log(res);
         //this.myLoader = false;
 
         //this.toast.success('Created Successfully')
@@ -198,7 +188,6 @@ export class Popup {
        
       //this.filepath.edit_filepath(this.value.shift_id,data).
       //pipe(untilDestroyed(t his)).subscribe( res => {
-        //console.log(res);
         //this.myLoader = false;
 
         //this.toast.success('Updated Successfully')
@@ -212,6 +201,15 @@ export class Popup {
     if (event.keyCode != 8 && !pattern.test(inputChar)) {
     event.preventDefault();
     }
+   }
+
+   output(ipaddress)
+   {
+    if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress)) {  
+      return (true)  
+    }  
+    alert("You have entered an invalid IP address!")  
+    return (false)  
    }
    ngOnDestroy(){
 
@@ -238,9 +236,10 @@ export class Edit {
   status:any
   filepath_response: any;
   add_val: any;
+  hide: boolean = true;
+
   constructor(private service:FilepathService,public dialogRef: MatDialogRef<Edit>,@Inject(MAT_DIALOG_DATA) public data: Edit,private fb:FormBuilder, private filepath: FilepathService) {
    this.value = data;
-   console.log(this.value)
     this.tenant=localStorage.getItem('tenant_id')
   
   }
@@ -248,6 +247,14 @@ export class Edit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+  output(ipaddress)
+   {
+    if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress)) {  
+      return (true)  
+    }  
+    alert("You have entered an invalid IP address!")  
+    return (false)  
+   }
   ngOnInit() {
 
 
@@ -259,12 +266,10 @@ export class Edit {
     machine_id:[this.value.edit_shift.machine.id]
   })
   this.filepath.tenant_id().pipe(untilDestroyed(this)).subscribe(res => {
-      console.log(res);
       this.filepath_response=res;
-      console.log(localStorage.getItem('token'));});
+     });
 
       this.service.machine(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
-      console.log(res);
   })
   }
   onSelect(id: any) {
@@ -272,14 +277,10 @@ export class Edit {
   }
   
   logintest() {
-    console.log(this.login.value);
 
     this.add_val = this.login.value 
-    console.log(this.value.edit_shift.id)
     this.add_val["slave_location"] =  "/home/part_program";
-    console.log(this.add_val);
     this.filepath.edit(this.value.edit_shift.id,this.add_val).pipe(untilDestroyed(this)).subscribe(res => {
-       //console.log(res.status);
        Swal.fire("Updated Successfully!")
       
       this.dialogRef.close();
@@ -289,7 +290,6 @@ export class Edit {
       //this.myLoader = true;
 
       //this.filepath.popup(this.login.value).pipe(untilDestroyed(this)).subscribe(res => {
-        //console.log(res);
         //this.myLoader = false;
 
         //this.toast.success('Created Successfully')
@@ -300,7 +300,6 @@ export class Edit {
        
       //this.filepath.edit_filepath(this.value.shift_id,data).
       //pipe(untilDestroyed(t his)).subscribe( res => {
-        //console.log(res);
         //this.myLoader = false;
 
         //this.toast.success('Updated Successfully')

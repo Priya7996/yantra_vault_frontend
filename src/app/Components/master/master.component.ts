@@ -42,15 +42,16 @@ export class MasterComponent implements OnInit {
   machine_response: any;
   tenant: any;
   reason: any;
+  length:any;
   machine_id:any;
   slavate:any;
   user:any;
   add_value:any;
-  id:any;
+  // id:any;
   constructor(private http: HttpClient,private fb:FormBuilder,public dialog: MatDialog,private nav:NavbarService,private service:ProgramListService) {
     this.nav.show();
     this.tenant = localStorage.getItem('tenant_id')
-    this.id = localStorage.getItem('machine_id')
+    // this.id = localStorage.getItem('machine_id')
     this.user = localStorage.getItem('user_id')
 
 
@@ -69,18 +70,19 @@ export class MasterComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.ngOnInit();
     });
   }
 
-  openDialog2(): void {
+  openDialog2(id): void {
     const dialogRef = this.dialog.open(Delete, {
       width: '250px',
+      data: { machine_id: id}
+
+      
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.ngOnInit();
     });
   }
@@ -89,14 +91,10 @@ export class MasterComponent implements OnInit {
   
   ngOnInit() {
     this.service.machine( this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
-      console.log(res);
       this.machine_response=res;
       // this.service.filelist( this.machine_response.id).subscribe(res =>{
-        console.log(res);
         this.machine_id = this.machine_response[0].id;
-        console.log(this.machine_id)
         let data = this.machine_id;
-        console.log(data)
 
         localStorage.setItem('machine_id',data);
         this.getmachine(this.machine_response[0].id)
@@ -105,11 +103,8 @@ export class MasterComponent implements OnInit {
   }
 
   upload(demo){
-    console.log(demo,"test")
-    console.log(this.machine_id)
 
     this.service.cnc_upload(demo,this.machine_id).pipe(untilDestroyed(this)).subscribe(res =>{
-      console.log(res);
       Swal.fire(res.status)
       location.reload()
     })
@@ -124,11 +119,9 @@ export class MasterComponent implements OnInit {
       "user_id": this.user,
       "position": val
     }
-    console.log(scotch)
 
     this.service.download(scotch).pipe(untilDestroyed(this)).subscribe(res =>{
 
-console.log(res);
  var file = new Blob([res], {
      type: 'text/json;charset=utf-8'
    });
@@ -155,10 +148,8 @@ console.log(res);
         "user_id": this.user,
         "position": position
       }
-      console.log(scotch)
   
       this.service.downloaded(scotch).pipe(untilDestroyed(this)).subscribe(res =>{
-        console.log(res);
         var file = new Blob([res], {
           type: 'text/json;charset=utf-8'
         });
@@ -178,11 +169,8 @@ console.log(res);
   }
 
   new_check(val){
-    console.log(val,"test")
-    console.log(this.machine_id)
 
     this.service.cnc_receive(val,this.machine_id).pipe(untilDestroyed(this)).subscribe(res =>{
-      console.log(res);
       Swal.fire(res.status)
       location.reload()
     })
@@ -192,14 +180,11 @@ console.log(res);
   getmachine(id) {
     this.myLoader = true;
      this.service.display_reason(id).pipe(untilDestroyed(this)).subscribe(res =>{
-      console.log(res)
       this.myLoader = false;
 
       this.reason=res;
       this.masterate = res.master_location
       this.slavate =res.slave_location
-      console.log(this.slavate)
-      console.log(this.masterate)
       this.dataSource=new MatTableDataSource(this.reason)
       this.slave=new MatTableDataSource(this.reason)
       if (res['status'] != null) {
@@ -236,9 +221,9 @@ export class Dialog {
   constructor(private http: HttpClient,public dialogRef: MatDialogRef<Dialog>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,private service:ProgramListService) {
   this.tenant = localStorage.getItem('tenant_id')  
   this.machine_id = localStorage.getItem('machine_id')
+  // this.id = localStorage.getItem('machine_id')
+
   this.value = data;
-  console.log(this.value)
-  console.log(this.machine_id )
   }
 
   onNoClick(): void {
@@ -247,7 +232,6 @@ export class Dialog {
 
   fileUpload1(event){ 
     this.file2 = event.target.files[0];
-    console.log(this.file2);
    
     
 }
@@ -260,7 +244,6 @@ export class Dialog {
     })
 
     this.service.machine( this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
-      console.log(res);
       this.machine_response=res;
       
     });
@@ -278,13 +261,11 @@ export class Dialog {
         'Authorization': "Bearer " + localStorage.getItem("token")
       })
     }  
-    console.log(this.add_val);
-    console.log(this.file2);
+    
     var fd = new FormData();
     fd.append('machine_id', this.test.value.machine_id);
     fd.append('revision_no','1');
     fd.append('file',this.file2);
-    console.log(fd,"file name");
 
     this.http.post("http://192.168.0.237:4000/api/v1/file_upload",fd, { headers: { Authorization: "Bearer " + localStorage.getItem("token") } }).subscribe(res =>{
       
@@ -321,9 +302,14 @@ export class Delete {
   startDate = new Date(2020, 0, 1);
   maxDate:any;
   minDate:any;
+  value:any;
+  // id:any;
   constructor(private service:ProgramListService,public dialogRef: MatDialogRef<Delete>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder) {
     this.machine_id = localStorage.getItem('machine_id')
-    console.log(this.machine_id )
+    // this.id = localStorage.getItem('machine_id')
+
+    this.value = data;
+   
     }
 
   onNoClick(): void {
@@ -343,12 +329,11 @@ export class Delete {
   }
   logintest()
   {
+    
 
-    console.log(this.login.value);
     this.add_val = this.login.value;
     this.add_val["id"] = this.machine_id;
       this.service.delete(this.login.value).pipe(untilDestroyed(this)).subscribe(res =>{
-        console.log(res.status);
         if (res['status'] != null) {
           Swal.fire(res['status'])
         }

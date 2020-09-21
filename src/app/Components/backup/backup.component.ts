@@ -23,6 +23,7 @@ export class BackupComponent implements OnInit {
   machine_id:any;
   myLoader = false;
   user:any;
+  
   constructor(public dialog: MatDialog,private fb :FormBuilder,private nav:NavbarService,private service :BackupService) { 
     this.tenant=localStorage.getItem('tenant_id')
     this.user = localStorage.getItem('user_id')
@@ -38,19 +39,15 @@ export class BackupComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.ngOnInit();
     });
   }
   ngOnInit() {
   
     this.service.machine( this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
-      console.log(res);
       this.machine_response=res;
       // this.service.filelist( this.machine_response.id).subscribe(res =>{
-        console.log(res);
         this.machine_id = this.machine_response[0].id;
-        console.log(this.machine_id)
         this.getmachine(this.machine_response[0].id)
       });
    
@@ -59,11 +56,9 @@ export class BackupComponent implements OnInit {
   getmachine(id) {
     this.myLoader = true;
      this.service.display_reason(id).pipe(untilDestroyed(this)).subscribe(res =>{
-      console.log(res)
       this.myLoader = false;
 
       this.backup=res.backup_location;
-      console.log(this.backup)
       // this.dataSource=new MatTableDataSource(this.backup)
      
       if (res['status'] != null) {
@@ -72,7 +67,6 @@ export class BackupComponent implements OnInit {
     })  
   }
   new_download(name,position){
-    console.log(name,position)
 
     let scotch ={
       "id": this.machine_id,
@@ -80,10 +74,8 @@ export class BackupComponent implements OnInit {
       "user_id": this.user,
       "position": position
     }
-    console.log(scotch)
 
     this.service.downloaded(scotch).pipe(untilDestroyed(this)).subscribe(res =>{
-      console.log(res);
       var file = new Blob([res], {
         type: 'text/json;charset=utf-8'
       });
@@ -97,10 +89,7 @@ export class BackupComponent implements OnInit {
    
 
 
-  testform(val)
-  {
-    console.log(this.test.value)
-  }
+ 
   ngOnDestroy(){
 
   }
@@ -123,15 +112,12 @@ export class Backup {
   constructor(private http: HttpClient,public dialogRef: MatDialogRef<Backup>,@Inject(MAT_DIALOG_DATA) public data: string,private fb:FormBuilder,private service :BackupService) {
      this.tenant = localStorage.getItem('tenant_id')  
      this.user_id = localStorage.getItem('user_id')
-     console.log(this.user_id);
      this.value = data;
-     console.log(this.value)
   
   }
 
   fileUpload1(event){
     this.file2 = event.target.files[0];
-    console.log(this.file2);
    
     
 }
@@ -148,14 +134,12 @@ export class Backup {
     })
 
     this.service.machine_lock( this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
-      console.log(res);
       this.machine_response=res;
       
     });
   }
   testform(val)
   { 
-    console.log(val);
     let headers = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -165,13 +149,11 @@ export class Backup {
     this.add_val = val ;
     this.add_val = this.value.edit_shift;
 
-    console.log(this.add_val);
     var fd = new FormData();
     fd.append('machine_id', this.test.value.machine_id);
     fd.append('reason', this.test.value.reason);
     fd.append('user_id',  this.user_id);
     fd.append('file', this.file2);
-    console.log(fd)
    
       this.http.post("http://192.168.0.237:4000/api/v1/backup_upload",fd, { headers: { Authorization: "Bearer " + localStorage.getItem("token") } }).subscribe(res =>{
       if (res['status'] != null) {

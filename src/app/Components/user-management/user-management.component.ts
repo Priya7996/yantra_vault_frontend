@@ -56,7 +56,6 @@ export class UserManagementComponent implements OnInit {
   ngOnInit() {
     this.service.operator().pipe(untilDestroyed(this)).subscribe(res => {
       this.roles_list = res;
-      console.log(this.roles_list)
     })
     this.myLoader = true;
     this.service.list(this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
@@ -145,7 +144,6 @@ export class User {
     this.service.operator().pipe(untilDestroyed(this)).subscribe(res => {
       this.roles_list = res;
       this.back_list = res.length;
-      console.log(this.back_list)
     })
 
 
@@ -172,7 +170,6 @@ export class User {
   }
 
   logintest() {
-    console.log(this.login.value)
     this.add_val = this.login.value;
     this.add_val["tenant_id"] = this.tenant;
     this.add_val["usertype_id"] = this.user;
@@ -211,7 +208,6 @@ export class Edit {
   constructor(private service: UserService, public dialogRef: MatDialogRef<Edit>, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, ) {
  
     this.edit_data = data;
-    console.log(this.edit_data )
   }
 
   onNoClick(): void {
@@ -228,7 +224,6 @@ export class Edit {
 
     this.service.operator().pipe(untilDestroyed(this)).subscribe(res => {
       this.roles_list = res;
-      console.log(this.roles_list)
     })
 
     this.tenant = localStorage.getItem('tenant_id');

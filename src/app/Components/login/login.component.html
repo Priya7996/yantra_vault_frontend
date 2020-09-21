@@ -7,7 +7,7 @@
         </div>
         <p class="mb_space"> Sign in continue with Yantra24x7</p>
         <form [formGroup]="login" (ngSubmit)="logintest(login.value)" autocomplete="off" class="login_form">
-          <mat-form-field class="form">
+          <mat-form-field class="form"  appearance="outline">
             <mat-label>User Name</mat-label>
             <input matInput formControlName="email_id" placeholder="Email" type="email"
               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" ng-reflect-pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a"
@@ -15,7 +15,7 @@
             <mat-error *ngIf="login.get('email_id').hasError('email')"> Enter valid email address</mat-error>
           </mat-form-field>
 
-          <mat-form-field class="form">
+          <mat-form-field class="form" appearance="outline">
             <mat-label>Password</mat-label>
             <input matInput formControlName="password" placeholder="Password" [type]=" hide ? 'password' : 'text'"
               required>
@@ -23,12 +23,19 @@
             </mat-icon>
 
           </mat-form-field>
+
+          <div class="forgot_pwd_link">
+            <a (click)="openDialog()">Forgot Password?</a>
+          </div>
+
           <div class="form-btn">
             <button mat-raised-button class="Submit" color="primary" [disabled]="login.invalid">Login</button>
           </div>
         </form>
-        <a (click)="openDialog()">Forgot Password?</a>
-        <a [routerLink]="['/wifi']" class="sign_link">Wifi Config</a>
+
+        <div class="wifi_link">
+          <a [routerLink]="['/wifi']" class="sign_link">Wifi Config</a>
+        </div>
 
         <mat-card-footer>
           <p class="help_msg">Do you have an account?
@@ -38,4 +45,3 @@
     </mat-card>
   </div>
 </section>
-

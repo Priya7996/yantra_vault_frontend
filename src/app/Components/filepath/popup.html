@@ -10,7 +10,8 @@
             <form [formGroup]="login" class="form_sec">
                 <mat-form-field appearance="outline">
                     <mat-label>Ip</mat-label>
-                    <input matInput formControlName="ip"  type="text">
+                    <input matInput formControlName="ip" 
+                     type="text">
                 </mat-form-field>
                 <div class="row_sec">
                     <mat-form-field appearance="outline">
@@ -20,7 +21,9 @@
 
                     <mat-form-field appearance="outline">
                         <mat-label>Password</mat-label>
-                        <input matInput formControlName="pass" type="text">
+                        <input matInput formControlName="pass" [type]=" hide ? 'password' : 'text'">
+                        <mat-icon class="eye" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
+                        </mat-icon>
                     </mat-form-field>
                 </div>
                 <p>File Location</p>

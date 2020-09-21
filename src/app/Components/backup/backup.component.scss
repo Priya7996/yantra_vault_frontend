@@ -22,3 +22,18 @@
     width: 90px;
     margin-top: -130px;
   }
+
+  .backup_sec {
+    display: flex;
+    .col{
+        width: calc(100% /1);
+        &:first-child{
+            margin-right: 20px;
+        }
+        h1{
+            font-size: 18px;
+            font-weight: 400;
+            margin-top: 0;
+        }
+    }
+  }

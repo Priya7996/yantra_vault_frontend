@@ -13,14 +13,13 @@
         min-height: 100vh;
         max-width: 690px;
         margin: 0 auto;
-        padding: 20px 0;
         position: relative;
             padding: 64px 0;
             .form_inner{
-                padding: 30px;
+                padding: 24px;
                 background: #fff;
                 box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-                border-radius: 0;
+                border-radius: 10px;
                 // margin-bottom: 180px;
             .brand_logo{
                 text-align: center;
@@ -33,12 +32,13 @@
             }
         }
         p{
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 400;
-            color: #aaa;
+            color: #595959;
             margin-bottom: 0;
             text-align: center;
-            line-height: 27px;
+            line-height: 26px;
+            margin-top: 5px;
             &.mb-16{
                 margin-bottom: 16px;
             }
@@ -58,8 +58,8 @@
                 .agree_link {
                     display: flex;
                     justify-content: center;
-                    color: #999;
-                    font-size: 16px;
+                    color: #595959;
+                    font-size: 14px;
                     margin: 16px 0;
                 }
                 .form-btn{
@@ -81,15 +81,6 @@
         }
         
         a{
-            color: #43a7fd;
-            text-decoration: none;
-            font-size: 16px;
-            display: block;
-            margin: 20px 0;
-            padding-left: 5px;
-            text-align: center;
-            cursor: pointer;
-            font-weight: 400;
             &.sign_link{
                 margin: 0 5px;
             }
@@ -98,7 +89,7 @@
             display: flex;
             justify-content: center;
             border-top: 1px solid #ececec;
-            padding-top: 16px;
+            padding: 15px 0;
         }
     }
 }

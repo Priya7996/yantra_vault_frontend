@@ -8,28 +8,27 @@
 
     <div class="dialog-form">
         <form [formGroup]="login">
-            <mat-form-field>
+            <mat-form-field appearance="outline">
                 <mat-label>Machine Name</mat-label>
                 <input matInput formControlName="machine_type" type="text" required>
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field appearance="outline">
                 <mat-label>Machine Type</mat-label>
                 <input matInput formControlName="machine_name" type="text" required>
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field appearance="outline">
                 <mat-label>Controller Model Number</mat-label>
                 <input matInput formControlName="machine_model" type="text" required>
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field appearance="outline">
                 <mat-label>Machine Serial Number</mat-label>
                 <input matInput formControlName="machine_serial_no" type="text" required>
             </mat-form-field>
-            <div class="row_sec">
-                <mat-form-field>
+                <mat-form-field appearance="outline">
                     <mat-label>Machine IP</mat-label>
                     <input matInput formControlName="machine_ip" type="text" required>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field appearance="outline">
                     <mat-label>Select Unit</mat-label>
                     <mat-select matNativeControl required formControlName="unit" required>
                         <mat-option value="Select unit" disabled>Select Unit</mat-option>
@@ -40,31 +39,29 @@
                         <mat-option value="Unit - 5">Unit5</mat-option>
                     </mat-select>
                 </mat-form-field>
-            </div>
-            <mat-form-field>
+            <mat-form-field appearance="outline">
                 <mat-label>Device ip (Eg:GTA-Y001-0001)</mat-label>
                 <input matInput formControlName="device_id" type="text" required>
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field appearance="outline">
                 <mat-label>Machine Type</mat-label>
                 <mat-select matNativeControl required formControlName="controller_type">
                     <mat-option value="Select Machine" disabled>Select Machine</mat-option>
                     <mat-option value="Ethernet" (click)="machineSelect('Ethernet')">Ethernet</mat-option>
                     <mat-option value="RS232" (click)="machineSelect('RS232')">RS232</mat-option>
-                    <mat-option value="CT&PT" (click)="machineSelect('CT&PT')">CT&PT</mat-option>
+                    <!-- <mat-option value="CT&PT" (click)="machineSelect('CT&PT')">CT&PT</mat-option> -->
                 </mat-select>
             </mat-form-field>
-            <!-- <mat-form-field>
-                <select matNativeControl required>
-                    <mat-label>machine Type</mat-label>
-                    <option value="Select Machine">Select Machine</option>
-                    <option value="Ethernet">Ethernet</option>
-                    <option value="RS232">RS232</option>
-                    <option value="CT&PT">CT&PT</option>
+            <mat-form-field appearance="outline"  *ngIf="login.value.controller_type === 'RS232' ">
+                <mat-label>Border Rate</mat-label>
+                <input matInput formControlName="border_rate" type="text" required> 
+            </mat-form-field>
 
-                </select>
-            </mat-form-field> -->
-            
+            <mat-form-field appearance="outline" *ngIf="login.value.controller_type === 'RS232' ">
+                <mat-label>T1 IP</mat-label>
+                <input matInput formControlName="t1_ip" type="text" required> 
+            </mat-form-field>
+
             <div class="form-button text-right">
                 <button mat-raised-button (click)="form()" [disabled]="login.invalid" class="filter_btn btn_orange">
                     Save</button>

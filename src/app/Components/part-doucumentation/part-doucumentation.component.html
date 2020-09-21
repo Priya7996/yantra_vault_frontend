@@ -7,19 +7,19 @@
           <span class="v-align-middle">Part Documentation</span>
         </h2>
         <div class="filter_sec">
-                      
           <div class="filter_field">
-         <mat-form-field appearance="outline">
-           <mat-select placeholder="Select Machine"  required 
-           [(ngModel)]="machine_id">
-             <mat-option *ngFor="let file of reason_response" [value]="file.id" (click)="code_compare(file.id)">{{file.machine_name}}</mat-option>
-           </mat-select>
-         </mat-form-field>
-       </div>
-     </div>
-        <div class="table_search">
-          <input class="form-control" type="text" name="search" placeholder="Search">
+            <mat-form-field appearance="outline">
+              <mat-select placeholder="Select Machine" required [(ngModel)]="machine_id">
+                <mat-option *ngFor="let file of reason_response" [value]="file.id" (click)="code_compare(file.id)">
+                  {{file.machine_name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="table_search">
+            <input class="form-control" type="text" name="search" placeholder="Search">
+          </div>
         </div>
+      
       </div>
       <mat-card class="card_sec">
         <mat-card-content class="table-responsive">
@@ -47,11 +47,11 @@
 
                 <th>Actions</th>
 
-               
+
 
               </tr>
             </thead>
-            <tr *ngFor ="let part of reason ; let i = index">
+            <tr *ngFor="let part of reason ; let i = index">
               <td>{{i+1}}</td>
               <td>{{part.create_date | date : "dd.MM.yyyy"}}</td>
               <td>{{part.file_name}}
@@ -63,25 +63,26 @@
               </td>
               <td>{{part.machine_name}}</td>
               <td>{{part.user_name}}
-                
+
               </td>
               <td>{{part.customername}}</td>
               <td>{{part.job_name}}</td>
               <td>---</td>
               <td>---</td>
-              
+
               <td>
 
                 <div>
-                  <button mat-raised-button (click)="openDialog()" class="filter_btn btn_orange" >
+                  <button mat-raised-button (click)="openDialog()" class="filter_btn btn_orange">
                     File Upload</button>
                 </div>
               </td>
               <td>
-                <div><a  (click)="openDialog2(part.id,part.customername,part.job_name)" class="Download"   ><i class="fa fa-pencil" aria-hidden="true"></i></a></div>
+                <div><a (click)="openDialog2(part.id,part.customername,part.job_name)" class="Download"><i
+                      class="fa fa-pencil" aria-hidden="true"></i></a></div>
 
               </td>
-             
+
             </tr>
           </table>
           <div *ngIf="reason.length==0" class="no_data_found">

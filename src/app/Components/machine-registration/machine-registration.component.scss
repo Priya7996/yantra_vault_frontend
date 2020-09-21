@@ -24,6 +24,7 @@
     font-size: 1.3rem;
     text-align: center;
     margin-bottom: 0;
+    text-transform: capitalize;
     // min-height: 50px;
     // height: 52px;
     // overflow: hidden;
@@ -33,6 +34,9 @@
     margin-bottom: 18px;
     text-align: center;
     margin-top: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: capitalize;
   }
   .content{
     .count{
@@ -149,13 +153,18 @@
   width: 90px;
   margin-top: -130px;
 }
+// .two_form.modal_sec .mat-form-field {
+//     width: 100%;
+//     margin-right: 0;
+//   &:nth-child(2n){
+//     margin-right: 0;
+//   }
+// }
 .two_form.modal_sec .mat-form-field {
-  width: calc(96% /2);
-  margin-right: 3%;
-  &:nth-child(2n){
-    margin-right: 0;
-  }
+  width: 100%;
+  margin-right: 0;
 }
+
 
 // Resposnive styles
 @media only screen and (max-width:768px) {

@@ -1,39 +1,45 @@
 <section class="login_page">
-    <div class="login_sec">
-      <mat-card class="form_inner">
-        <mat-card-content>
-        
-          <p class="mb_space"> Wifi Configuration</p>
-          <form [formGroup]="login"  (ngSubmit)="logintest()" autocomplete="off" class="login_form">
-            <mat-form-field class="form">
-              <mat-label>Network Name</mat-label>
-              <input matInput formControlName="user_name" type="text" required>
-            </mat-form-field>
-       
-            <mat-form-field class="form">
-              <mat-label>Password</mat-label>
-              <input matInput formControlName="password" placeholder="Password" [type]=" hide ? 'password' : 'text'"
-                required>
-              <mat-icon class="eye" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
-              </mat-icon>
-  
-            </mat-form-field>
-       
-            <div class="form-btn">
-              <button mat-raised-button class="Submit" color="primary"  [disabled]="login.invalid">Connect</button>
-            </div>
-          </form>
+  <div class="login_sec">
+    <mat-card class="form_inner">
+      <mat-card-content>
+
+        <p class="mb_space"> Wifi Configuration</p>
+        <form [formGroup]="login" (ngSubmit)="logintest()" autocomplete="off" class="login_form">
+          <mat-form-field class="form" appearance="outline">
+            <mat-label>Network Name</mat-label>
+            <input matInput formControlName="user_name" type="text" required>
+
+           
+          </mat-form-field>
+
+          <mat-form-field class="form" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" placeholder="Password" [type]=" hide ? 'password' : 'text'"
+              required>
+            <mat-icon class="eye" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
+
+          </mat-form-field>
 
           <div class="form-btn">
-            <button mat-raised-button class="Submit" color="primary" (click)="wifi()">Scan</button>
-  </div>
-  <h3>Wifi Name List:{{scanning}}</h3>
-         
- 
-<!-- <h2>{{retryMessage}}</h2>  -->
+            <!-- <button mat-raised-button class="Submit" color="primary" [disabled]="login.invalid" 
+             data-toggle="modal" data-target="#count_wifi">Connect</button> -->
+             <button mat-raised-button class="Submit" color="primary"
+             data-toggle="modal" data-target="#count_wifi">Connect</button>
+          </div>
+        </form>
 
-</mat-card-content>
-<!-- 
+        <h3 class="list_title">Wifi Name List:{{scanning}}
+          <mat-icon class="eye" matSuffix>
+            <span class="material-icons" (click)="wifi()">
+              qr_code_scanner
+            </span>
+          </mat-icon>
+          
+        </h3>
+        <!-- <h2>{{retryMessage}}</h2>  -->
+      </mat-card-content>
+      <!-- 
 <button mat-button (click)="openDialogWithRef(gokul_test)">Open dialog with reference</button>
 
 <ng-template  #gokul_test>
@@ -44,27 +50,36 @@
   </mat-dialog-actions>
 </ng-template> -->
 
+    </mat-card>
 
-      </mat-card>
+  </div>
 
-      
 
-    </div>
+  
 
-    <mat-card class="card2"  *ngIf="gokul_test == true" >
 
-      <div >
-               
-        <h2>Wait untill system reboot</h2>
-        <div ><h2>
-         {{retryMessage}}sec</h2>
-        </div>
+
+<!-- Modal -->
+<div class="modal fade"  *ngIf="gokul_test == true" id="count_wifi" 
+tabindex="-1" role="dialog" aria-labelledby="count_wifi" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Wifi Configuration</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      
-      </mat-card>
-
-    
-     
-  </section>
-  
-  
+      <div class="modal-body">
+       <h2>Wait untill system reboot</h2>
+       <span>
+        {{retryMessage}}sec</span>
+      </div>
+      <div class="modal-footer">
+        <button mat-raised-button type="button" class="filter_btn btn_orange">Save</button>
+        <button mat-raised-button type="button" class="filter_btn btn_default ml-16" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</section>

@@ -46,7 +46,6 @@ export class RegisterComponent implements OnInit {
    }
    logintest(val)
    {
-    
      this.add_val=val;
      this.add_val["tenant_id"] =this.tenant;
      this.add_val["usertype_id"] =this.user;

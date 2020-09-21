@@ -25,13 +25,14 @@ export class LoginComponent implements OnInit {
   logintest(val) {
     localStorage.setItem('password',val.password)
     this.service.signin(val).subscribe(res => {
+      localStorage.setItem('token', res.access_token);
+      localStorage.setItem('tenant_id',res.tenant_id);
       if (res === false) {
         alert('The Username or Password is incorrect')
       } else {
         this.router.navigateByUrl('/machine_registration');
       }
-      localStorage.setItem('token', res.access_token);
-      localStorage.setItem('tenant_id',res.tenant_id);
+    
       localStorage.setItem('usertype_id',res.usertype_id);
       localStorage.setItem('role_id',res.role_id);
       localStorage.setItem('id',res.id)

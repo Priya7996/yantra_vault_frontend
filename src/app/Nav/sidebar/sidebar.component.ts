@@ -64,7 +64,6 @@ toggle_menu(){
   this.Compare = !this.Compare;
 
   // CHANGE THE NAME OF THE BUTTON.
-  console.log(this.Compare)
   if (this.Compare)
     this.keyboard_arrow_down = "Compare";
   else
@@ -156,7 +155,6 @@ export class editComponent {
   }
   editform() {
     this.service.editvalue(this.tenant,this.edit1.value).subscribe(res => {
-      console.log(res)
       if(res === true)
       {
         Swal.fire("Updated Succesfully !")

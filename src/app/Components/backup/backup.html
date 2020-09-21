@@ -8,7 +8,7 @@
   <div class="dialog-form">
     <div class="filter_sec">
       <form [formGroup]="test" (ngSubmit)="testform(test.value)" class="form_sec">
-        <mat-form-field appearance="standard">
+        <mat-form-field appearance="outline">
           <mat-select placeholder="Select Machine"   matNativeControl required formControlName="machine_id">
             <mat-option *ngFor="let machine of machine_response" [value]="machine.id">
                 {{machine.machine_name}}
@@ -16,7 +16,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Reason</mat-label>
           <input matInput formControlName="reason" type="text">
         </mat-form-field>

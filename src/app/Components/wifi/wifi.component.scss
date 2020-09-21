@@ -32,7 +32,7 @@
     height: 100vh;
     width: 100%;
     position: relative;
-    background: url(../../../assets/images/bg_login.jpg) no-repeat;
+    background: url(../../../assets/images/wifi_bg.jpg) no-repeat;
     min-height: auto;
     padding-bottom: 0;
     background-size: cover;
@@ -46,10 +46,9 @@
             left: 50%;
             transform: translate(-50%, -50%);
             .form_inner{
-                padding: 30px;
                 background: #fff;
                 box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-                border-radius: 0;
+                border-radius: 10px;
             .brand_logo{
                 text-align: center;
                 img{
@@ -62,8 +61,8 @@
         }
         p{
             font-size: 16px;
-            font-weight: 300;
-            color: #aaa;
+            font-weight: 500;
+             color: #555555;
             margin-bottom: 0;
             text-align: center;
             line-height: 26px;
@@ -76,7 +75,7 @@
             mat-form-field{
                 width: 100%;
                 font-size: 16px;
-                margin-bottom: 1rem;
+                margin-bottom: unset;
             }
             .form-btn{
                 button{
@@ -93,6 +92,12 @@
             }
             mat-icon {
                 cursor: pointer!important;
+                font-size: 18px;
+                cursor: pointer;
+                span{
+                    font-size: 18px;
+                    cursor: pointer;
+                }
             }
             
         }
@@ -120,6 +125,12 @@
     }
 }
 }
+.list_title{
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
 
 ::ng-deep .mat-form-field-appearance-legacy {
     .mat-form-field-underline {
@@ -136,3 +147,31 @@
     }
 }
 
+.modal#count_wifi{
+.modal-body{
+    h2{
+        font-size: 20px;
+        font-weight: 400;;
+    }
+    span{
+        font-size: 18px;
+        font-weight: 500;
+        color: #f7941d;
+    }
+}
+}
+::ng-deep .modal-backdrop{
+    &.show {
+        opacity: 0!important;
+    }
+}
+.btn_orange{
+background: #f7941d;
+border-color: #f7941d;
+color: #fff;
+}
+.btn_default{
+    background-color: #e2e2e2;
+    border-color: #ccc;
+    color: #333 !important;
+}

@@ -132,13 +132,14 @@ export class Add {
       unit:["",Validators.required],
       device_id:["",Validators.required],
       controller_type:["",Validators.required],
+      border_rate:["",],
+      t1_ip:["",]
      
     })
    
   }
   form()
   {
-    console.log(this.login.value)
      this.add_val = this.login.value;
 
      this.add_val["tenant_id"] = this.tenant
@@ -172,7 +173,6 @@ export class Edit {
   edit_data1:any;
   constructor(public dialogRef: MatDialogRef<Edit>,@Inject(MAT_DIALOG_DATA) public data1: any,private fb:FormBuilder,private service:MachineService) {
      this.edit_data1 = data1;
-     console.log(this.edit_data1)
   }
 
   onNoClick(): void {
@@ -190,6 +190,8 @@ export class Edit {
       device_id:[this.edit_data1.device_id],
       unit:[this.edit_data1.unit],
       controller_type:[this.edit_data1.controller_type],
+      border_rate:[this.edit_data1.controller_type],
+      t1_ip:[this.edit_data1.controller_type]
 
     })
   }

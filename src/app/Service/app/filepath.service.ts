@@ -15,23 +15,20 @@ export class FilepathService {
 
   constructor(private http:HttpClient, private token: TokenService ) { 
     this.token1 = localStorage.getItem('token');
-    console.log(this.token1)
     let headers1: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.token1}`
     });
-  console.log(headers1)
   }
   // url = environment.serverUrl;
   tenantId = this.token.getTenantID();
  
   tenant_id() {
-    console.log(this.headers);
     return this.http.get('machines?tenant_id='+this.tenantId, this.headers);
   }
  
   popup(params)
-  {console.log(params)
+  {
    return this.http.post('/program_confs',params)
   }
   edit(id,value)
