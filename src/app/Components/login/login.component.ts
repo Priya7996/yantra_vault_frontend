@@ -21,11 +21,14 @@ export class LoginComponent implements OnInit {
       email_id: ["", Validators.email],
       password: ["", Validators.required]
     })
+
+  
   }
   logintest(val) {
     localStorage.setItem('password',val.password)
     this.service.signin(val).subscribe(res => {
       localStorage.setItem('token', res.access_token);
+      console.log(res.access_token)
       localStorage.setItem('tenant_id',res.tenant_id);
       if (res === false) {
         alert('The Username or Password is incorrect')

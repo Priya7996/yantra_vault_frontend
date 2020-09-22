@@ -171,7 +171,7 @@ h1, h2, h3, h4, h5, h6{
 .page{
     transition: width 0.3s linear;
     background-color: #f0f0f0;
-    height: calc(100vh - 109px);
+    height: calc(100vh - 50px);
     padding-bottom: 34px;
     padding-top: 64px;
     overflow-x: hidden;
@@ -486,6 +486,10 @@ mat-dialog-container{
     height: 90%!important;
     .dialog-form{
         padding: 10px!important;
+        &.scroll_form{
+            overflow-y: scroll;
+            height: 430px;
+        }
     }
 }
 
@@ -852,7 +856,7 @@ mat-card-footer{
         display: flex;
         align-items: center;
         a {
-            padding-left: 5px;
+            padding-left:10px;
             cursor: pointer;
         }
     }
