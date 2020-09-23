@@ -155,7 +155,7 @@ export class Backup {
     fd.append('user_id',  this.user_id);
     fd.append('file', this.file2);
    
-      this.http.post("http://192.168.0.237:4000/api/v1/backup_upload",fd, { headers: { Authorization: "Bearer " + localStorage.getItem("token") } }).subscribe(res =>{
+      this.http.post("http://yantra.local:40010/api/v1/backup_upload",fd, { headers: { Authorization: "Bearer " + localStorage.getItem("token") } }).subscribe(res =>{
       if (res['status'] != null) {
         Swal.fire(res['status'])
       }

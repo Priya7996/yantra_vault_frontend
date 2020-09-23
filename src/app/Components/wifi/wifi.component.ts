@@ -40,20 +40,20 @@ export class WifiComponent implements OnInit {
     })
   }
   logintest() {
-    let times = -60;
-    setInterval(() => {
-      this.gokul_test = true;
-      console.log("start")
+    // let times = -60;
+    // setInterval(() => {
+    //   this.gokul_test = true;
+    //   console.log("start")
     
-      this.retryMessage = times++;
-    }, 1000);
+    //   this.retryMessage = times++;
+    // }, 1000);
 
-    setInterval(() => {
-     this.route.navigateByUrl('');
+    // setInterval(() => {
+    //  this.route.navigateByUrl('');
 
-      this.gokul_test = true;
-      console.log("completed")
-    }, 60000);
+    //   this.gokul_test = true;
+    //   console.log("completed")
+    // }, 60000);
 
    
      var data = this.login.value.user_name;
