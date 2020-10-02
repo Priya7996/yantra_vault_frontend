@@ -36,6 +36,19 @@ export class PartDoucumentationComponent implements OnInit {
   }
 
 
+  openDialog6(): void {
+    // console.log(id)
+
+    const dialogRef = this.dialog.open(Backup, {
+      width: '250px',
+      // data: {id: id,}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    });
+  }
+
   openDialog2(id,cname,jname): void {
     const dialogRef = this.dialog.open(Delete, {
       width: '250px',
@@ -167,4 +180,33 @@ ngOnDestroy(){
  
 }
 
+}
+
+@Component({
+  selector: 'backup-page',
+  templateUrl: 'backup.html',
+})
+export class Backup {
+  // value:any;
+  constructor(private http: HttpClient,public dialogRef: MatDialogRef<Backup>,@Inject(MAT_DIALOG_DATA) private fb:FormBuilder,private service :PartService) {
+   
+    // this.value = data;
+    // console.log(this.value)
+  }
+
+
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+  ngOnInit() {
+
+   
+
+    
+  }
+  
+
+  
+   
 }

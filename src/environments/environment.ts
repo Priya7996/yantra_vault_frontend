@@ -7,8 +7,8 @@ export const environment = {
   version: '1.0.0',
    //serverUrl: 'http://13.235.142.89/api/v1/',
   //serverUrl: 'http://13.235.142.89:80/api/v1/',
-
-   serverUrl: 'http://yantra.local:40010/api/v1/',
+  serverUrl: 'http://192.168.0.237:4000/api/v1/'
+   //serverUrl: 'http://yantra.local:40010/api/v1/',
   // http://52.66.140.40
 };
 

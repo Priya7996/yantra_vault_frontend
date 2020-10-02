@@ -39,7 +39,7 @@
 
                 <th>Job Name</th>
 
-                <th>Old Revision Number</th>
+                <!-- <th>Old Revision Number</th> -->
 
                 <th>New Revision Number</th>
 
@@ -57,7 +57,7 @@
               <td>{{part.file_name}}
 
                 <div>
-                  <button mat-raised-button class="filter_btn btn_orange" [routerLink]="['/reason']">
+                  <button mat-raised-button class="filter_btn btn_orange" (click)="openDialog6()">
                     Version History</button>
                 </div>
               </td>
@@ -67,7 +67,7 @@
               </td>
               <td>{{part.customername}}</td>
               <td>{{part.job_name}}</td>
-              <td>---</td>
+              <!-- <td>---</td> -->
               <td>---</td>
 
               <td>

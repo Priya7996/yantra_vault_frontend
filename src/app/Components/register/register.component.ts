@@ -58,7 +58,10 @@ export class RegisterComponent implements OnInit {
     
        if (res === true) {
         Swal.fire('Thank You for registering with Yantra24x7')
+
       }
+      this.route.navigateByUrl('');
+
      })
    }
   

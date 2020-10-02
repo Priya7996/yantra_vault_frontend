@@ -267,7 +267,7 @@ export class Dialog {
     fd.append('revision_no','1');
     fd.append('file',this.file2);
 
-    this.http.post("http://yantra.local:40010/api/v1/file_upload",fd, { headers: { Authorization: "Bearer " + localStorage.getItem("token") } }).subscribe(res =>{
+    this.http.post("http://192.168.0.237:4000/api/v1/file_upload",fd, { headers: { Authorization: "Bearer " + localStorage.getItem("token") } }).subscribe(res =>{
       
       if (res['status'] != null) {
         Swal.fire(res['status'])

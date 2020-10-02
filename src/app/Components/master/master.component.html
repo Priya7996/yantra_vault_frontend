@@ -46,10 +46,10 @@
                 <tr *ngFor="let master of masterate">
                   <td>{{master}}</td>
                   <td class="action">
-                    <div><a class="Download" matTooltip="Download" (click)="new_download(master,'Master')"><i
+                    <div><a class="Download" matTooltip="Local Download" (click)="new_download(master,'Master')"><i
                           class="fa fa-download" aria-hidden="true"></i></a></div>
 
-                    <div><a class="Download" matTooltip="Download" (click)="upload(master)"><i class="fa fa-send"
+                    <div><a class="Download" matTooltip="Upload" (click)="upload(master)"><i class="fa fa-send"
                           aria-hidden="true"></i></a>
                     </div>
 
@@ -64,9 +64,9 @@
           
 
         </div>
-        <div *ngIf="masterate.length==0" class="no_data_found">
+        <!-- <div *ngIf="masterate.length==0" class="no_data_found">
           <h2>No data found</h2>
-        </div>
+        </div> -->
         <div class="col">
           <h1>Slave</h1>
           <mat-card class="card_sec">
@@ -92,9 +92,9 @@
               </table>
             </mat-card-content>
           </mat-card>
-          <div *ngIf="slavate.length==0" class="no_data_found">
+          <!-- <div *ngIf="slavate.length==0" class="no_data_found">
             <h2>No data found</h2>
-          </div>
+          </div> -->
        
         </div>
         

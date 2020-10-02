@@ -20,13 +20,13 @@ export class FilepathService {
       'Authorization': `Bearer ${this.token1}`
     });
   }
-  // url = environment.serverUrl;
   tenantId = this.token.getTenantID();
+
+  // url = environment.serverUrl;
  
-  tenant_id() {
-    return this.http.get('machines?tenant_id='+this.tenantId, this.headers);
+  tenant_id(tenantId):Observable<any>{
+    return this.http.get('machines?tenant_id='+tenantId)
   }
- 
   popup(params)
   {
    return this.http.post('/program_confs',params)

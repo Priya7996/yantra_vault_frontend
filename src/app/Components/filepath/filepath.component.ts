@@ -141,18 +141,18 @@ export class Popup {
   //   }
   
   this.login = this.fb.group({
-    ip:["",Validators.pattern('^[0-9]{10}$')],
+    ip:["",Validators.pattern],
     user_name:["",],
     pass:["",],
     master_location:["",],
     machine_id:["",]
   })
-  this.filepath.tenant_id().pipe(untilDestroyed(this)).subscribe(res => {
+  this.filepath.tenant_id(this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
       this.filepath_response=res;
      });
 
-      this.service.machine(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
-  })
+  //     this.service.machine(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
+  // })
   }
   onSelect(id: any) {
     throw new Error("Method not implemented.");
@@ -265,7 +265,7 @@ export class Edit {
     master_location:["/home/part_program"],
     machine_id:[this.value.edit_shift.machine.id]
   })
-  this.filepath.tenant_id().pipe(untilDestroyed(this)).subscribe(res => {
+  this.filepath.tenant_id(this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
       this.filepath_response=res;
      });
 

@@ -27,7 +27,7 @@ export class WifiComponent implements OnInit {
   retryMessage:any;
   status:any;
   constructor(private route:Router,private fb: FormBuilder, private nav: NavbarService, private service: WifiService, ) {
-    this.nav.show();
+    this.nav.hide();
   }
 
   ngOnInit() {

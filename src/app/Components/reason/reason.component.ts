@@ -11,7 +11,7 @@ import { MatTableDataSource } from '@angular/material';
 })
 export class ReasonComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'user_name', 'machine_name', 'description','old_revision_no','new_revision_no','file_name'];
+  displayedColumns: string[] = ['position', 'user_name', 'date', 'machine_name', 'description','old_revision_no','new_revision_no','file_name'];
   dataSource = new MatTableDataSource();
   public dolly = (value: string) => {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
