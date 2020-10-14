@@ -79,6 +79,8 @@ this.service.show_filepath(this.tenant).pipe(untilDestroyed(this)).subscribe(res
               }
               this.ngOnInit()
             })
+            this.ngOnInit()
+
           }
         })
       }

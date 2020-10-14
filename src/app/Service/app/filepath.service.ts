@@ -5,7 +5,7 @@ import { environment} from '../../../environments/environment';
 import { TokenService} from '../core/authentication/token.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' 
 })
 export class FilepathService {
 

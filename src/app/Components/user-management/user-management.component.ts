@@ -56,6 +56,7 @@ export class UserManagementComponent implements OnInit {
   ngOnInit() {
     this.service.operator().pipe(untilDestroyed(this)).subscribe(res => {
       this.roles_list = res;
+      console.log(res);
     })
     this.myLoader = true;
     this.service.list(this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
@@ -82,7 +83,8 @@ export class UserManagementComponent implements OnInit {
         }).then((destroy) => {
           if (destroy.value) {
             this.service.delete_row(id).pipe(untilDestroyed(this)).subscribe(res => {
-              alert("Deleted Successfully!")
+              Swal.fire("Deleted successfully!")
+
               this.ngOnInit()
             })
           }
@@ -120,7 +122,6 @@ export class User {
   constructor(private service: UserService, public dialogRef: MatDialogRef<User>, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, ) {
 
     this.tenant = localStorage.getItem('tenant_id');
-    this.user = localStorage.getItem('usertype_id')
     this.approval = localStorage.getItem('approval_id')
     this.role = localStorage.getItem('role_id');
 
@@ -143,6 +144,7 @@ export class User {
 
     this.service.operator().pipe(untilDestroyed(this)).subscribe(res => {
       this.roles_list = res;
+      console.log(res)
       this.back_list = res.length;
     })
 
@@ -172,7 +174,7 @@ export class User {
   logintest() {
     this.add_val = this.login.value;
     this.add_val["tenant_id"] = this.tenant;
-    this.add_val["usertype_id"] = this.user;
+    // this.add_val["usertype_id"] = this.user;
     this.add_val["approval_id"] = this.approval;
     // this.add_val["role_id"] = this.role;
 
@@ -208,6 +210,7 @@ export class Edit {
   constructor(private service: UserService, public dialogRef: MatDialogRef<Edit>, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, ) {
  
     this.edit_data = data;
+    console.log(this.edit_data)
   }
 
   onNoClick(): void {
@@ -235,7 +238,7 @@ export class Edit {
       password: [this.edit_data.password],
       phone_number: [this.edit_data.phone_number],
       remarks: [this.edit_data.remarks],
-      role_id: [this.edit_data.role_name],
+      role_id: [this.edit_data.id],
 
     })
 

@@ -11,15 +11,18 @@
                 <mat-form-field appearance="outline">
                     <mat-label>Customer Name</mat-label>
                     <input matInput formControlName="customer_name" type="text">
+            <mat-error *ngIf="login.get('customer_name').hasError('required')"> Enter Customer Name</mat-error>
+
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
                     <mat-label>Job Name</mat-label>
                     <input matInput formControlName="job_name" type="text">
+                    <mat-error *ngIf="login.get('job_name').hasError('required')"> Enter Job Name</mat-error>
                 </mat-form-field>
 
                 <div class="form-button text-right">
-                    <button mat-raised-button [disabled]="login.invalid" (click)="logintest()"
+                    <button mat-raised-button  (click)="logintest()"
                         class="filter_btn btn_orange"> Save</button>
                     <button mat-raised-button (click)="onNoClick()" class="filter_btn btn_default ml-16">Close</button>
                 </div>

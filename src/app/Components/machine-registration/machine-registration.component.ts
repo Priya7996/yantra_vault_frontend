@@ -146,7 +146,8 @@ export class Add {
      this.add_val["controller_type"]=this.controller_type;
 
     this.service.machine(this.login.value).pipe(untilDestroyed(this)).subscribe(res => {
-      alert('created successfully')
+      Swal.fire("created successfully!")
+
       this.dialogRef.close();
 
   })

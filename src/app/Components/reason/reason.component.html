@@ -1,4 +1,7 @@
     <section class="page">
+      <div *ngIf="myLoader" class="spinner">
+        <img src="assets/images/spinner.gif">
+      </div>
   <div class="section_top_padding">
     <div class="container-fluid">
       <div class="page_title_sec">
@@ -19,7 +22,7 @@
             </div>
           </div>
             <div class="table_search">
-              <input class="form-control" (keyup)="dolly($event.target.value)" type="text" name="search" [(ngModel)]="searchText" placeholder="Search">
+              <input class="form-control" (keyup)="search($event.target.value)" type="text" name="search" [(ngModel)]="searchText" placeholder="Search anything here!">
                      </div>
         </div>
       </div>
@@ -82,10 +85,14 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
+
+          <div *ngIf="reason.length==0" class="no_data_found">
+            <h2>No data found</h2>
+          </div>
         </mat-card-content>
-        <mat-card-content *ngIf="reason.length==0" class="no_data_found">
+        <!-- <mat-card-content *ngIf="reason.length==0" class="no_data_found">
           <h2>No data found</h2>
-        </mat-card-content>
+        </mat-card-content> -->
       </mat-card>
     </div>
   </div>

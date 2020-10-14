@@ -3,10 +3,15 @@
       flex-wrap: wrap;
   .mat-form-field {
       width: 48%!important;
-      &:nth-child(odd){
-          margin-right: 14px;
+      margin-right: 5px!important;
+      &:nth-child(even){
+          margin-right: 0;
       }
       }
+  }
+
+  .allign{
+    padding: 15px;
   }
 .cards_collections{
   margin-top: 24px;

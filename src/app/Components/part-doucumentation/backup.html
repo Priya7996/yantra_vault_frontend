@@ -1,146 +1,74 @@
-<section class="page">
-    <div *ngIf="myLoader" class="spinner">
-        <img src="assets/images/spinner.gif">
-      </div>
-    <div class="section_top_padding">
-        <div class="container-fluid">
-            <div class="page_title_sec">
-                <h2 class="sub_title">
-                    <mat-icon class="v-align-middle display">laptop</mat-icon>
-                    <span class="v-align-middle"> Reason</span>
-                </h2>
-           
-            </div>
 
-            <div class="cards_collections">
-                <div class="px-16">
-                    <mat-card class="example-card">
-                        <mat-card-content>
-                            <div class="switch_holder">
-                                <!-- <div class="action_menus">
-                                    <mat-icon (click)="setting_view(machine)" class="v-align-middle edit" matTooltip="Status Update">
-                                        settings</mat-icon>
-                                    <mat-icon (click)="edit_view(machine)" class="v-align-middle edit" matTooltip="Edit">
-                                        edit</mat-icon>
-                                    <mat-icon (click)="delete_view(machine.id)" class="v-align-middle edit" matTooltip="Delete">
-                                        delete</mat-icon>
-                                </div> -->
-                            </div>
-                           
+<div class="modal_sec two_form">
+    <mat-toolbar>
+        <h3>Version History</h3>
+        <button type="button" class="close" aria-label="Close" (click)="onNoClick()">
+            <span aria-hidden="true">×</span>
+        </button>
+    </mat-toolbar>
 
-                            <h2>reason 1</h2>
-                            <h3>reason 2</h3>
-                            <div class="content">
-                                <!-- <div class="count" >{{i+1}}</div> -->
+    <div class="row_sec model_align_sec" >
+        <!-- <h3>Reason</h3> -->
+                            <!-- <div class="content">
                                 <div class="full_date">
                                     <p>
                                         Controller  :
-                                        <span>reason 3</span>
+                                        <span>1</span>
                                     </p>
                                 
                                     <p>
                                         Model  :
-                                        <span>reason 4</span>
+                                        <span>LMW</span>
                                     </p>
                                     <p>
                                         IP :
-                                        <span> reason 5</span>
+                                        <span> 192.168.0.237</span>
                                     </p>
                                 </div>
-                            </div>
-                        </mat-card-content>
-                    </mat-card>
-                </div>
-                <!-- <div class="px-16">
-                    <mat-card class="example-card">
-                        <mat-card-content>
-                            <div class="switch_holder">
-                                <mat-slide-toggle class="status"></mat-slide-toggle>
-                                <div class="action_menus">
-                                    <mat-icon (click)="edit_view()" class="v-align-middle edit" matTooltip="Edit">
-                                        edit</mat-icon>
-                                </div>
-                            </div>
+                            </div> -->
+                            <mat-card-content class="table-responsive">
 
-                            <h2>RIPL/VMC/HW/EM-C22</h2>
-                            <div class="content">
-                                <div class="count">2</div>
-                                <div class="full_date">
-                                    <p>
-                                        timeintervel :
-                                        <span>10</span>
+                            <table>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Date</th>
+                                    <th>Machine Name</th>
+                                    <th>User Name</th>
+                                    <th>File Name</th>
+                                    <th>Customer Name</th>
+                                    <th>Job Name</th>
+                                    <th>Description</th>
+                                    <th>Old Revision Number</th>
+                                    <th>New Revision Number</th>
+</tr>
+<tr *ngFor = "let reason of version ; let i= index">
+    <td>{{i+1}}</td>
+    <td>{{reason.create_date | date}}</td>
+    <td>{{reason.machine_name}}</td>
 
-                                    </p>
-                                    <p>
-                                        Reason :
-                                        <span class="reason"> idle</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </mat-card-content>
-                    </mat-card>
-                </div>
-                <div class="px-16">
-                    <mat-card class="example-card">
-                        <mat-card-content>
-                            <div class="switch_holder">
-                                <mat-slide-toggle class="status"></mat-slide-toggle>
-                                <div class="action_menus">
-                                    <mat-icon (click)="edit_view()" class="v-align-middle edit" matTooltip="Edit">
-                                        edit</mat-icon>
-                                </div>
-                            </div>
+    <td>{{reason.user_name}}</td>
 
-                            <h2>RIPL/VMC/HW/EM-C22</h2>
-                            <div class="content">
-                                <div class="count">3</div>
-                                <div class="full_date">
-                                    <p>
-                                        timeintervel :
-                                        <span>10</span>
+    <td>{{reason.file_name}}</td>
 
-                                    </p>
-                                    <p>
-                                        Reason :
-                                        <span class="reason"> idle</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </mat-card-content>
-                    </mat-card>
-                </div>
+    <td>{{reason.customername}}</td>
 
-                <div class="px-16 pr-0">
-                    <mat-card class="example-card">
-                        <mat-card-content>
-                            <div class="switch_holder">
-                                <mat-slide-toggle class="status"></mat-slide-toggle>
-                                <div class="action_menus">
-                                    <mat-icon (click)="edit_view()" class="v-align-middle edit" matTooltip="Edit">
-                                        edit</mat-icon>
-                                </div>
-                            </div>
+    <td>{{reason.job_name}}</td>
 
-                            <h2>RIPL/VMC/HW/EM-C22</h2>
-                            <div class="content">
-                                <div class="count">4</div>
-                                <div class="full_date">
-                                    <p>
-                                        timeintervel :
-                                        <span>10</span>
+    <td>{{reason.description}}</td>
 
-                                    </p>
-                                    <p>
-                                        Reason :
-                                        <span class="reason"> idle</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </mat-card-content>
-                    </mat-card>
-                </div> -->
+    <td>{{reason.old_revision_no}}</td>
 
-            </div>
-        </div>
+    <td>{{reason.new_revision_no}}</td>
+
+</tr>
+                            </table>
+                            </mat-card-content>
+
+                            
     </div>
-</section>
+</div>
+
+
+
+
+

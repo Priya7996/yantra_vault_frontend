@@ -1,4 +1,7 @@
 <section class="page">
+  <div *ngIf="myLoader" class="spinner">
+    <img src="assets/images/spinner.gif">
+  </div>
   <div class="section_top_padding">
     <div class="container-fluid">
       <div class="page_title_sec">
@@ -15,9 +18,13 @@
               </mat-select>
             </mat-form-field>
           </div>
-          <div class="table_search">
-            <input class="form-control" type="text" name="search" placeholder="Search">
+          <div class="table_search"> 
+            <input class="form-control" type="text" (keyup)="search($event.target.value)" name="search" [(ngModel)]="searchText" placeholder="Search anything here!">
+
+
           </div>
+
+          
         </div>
       
       </div>
@@ -57,7 +64,7 @@
               <td>{{part.file_name}}
 
                 <div>
-                  <button mat-raised-button class="filter_btn btn_orange" (click)="openDialog6()">
+                  <button mat-raised-button class="filter_btn btn_orange" (click)="openDialog6(part.id,part.file_name)">
                     Version History</button>
                 </div>
               </td>
@@ -68,20 +75,24 @@
               <td>{{part.customername}}</td>
               <td>{{part.job_name}}</td>
               <!-- <td>---</td> -->
-              <td>---</td>
+              <td>{{part.new_revision_no}}</td>
 
               <td>
 
                 <div>
-                  <button mat-raised-button (click)="openDialog()" class="filter_btn btn_orange">
+                  <button mat-raised-button (click)="openDialog(part.id)" class="filter_btn btn_orange">
                     File Upload</button>
                 </div>
               </td>
-              <td>
+              <td class="action">
                 <div><a (click)="openDialog2(part.id,part.customername,part.job_name)" class="Download"><i
                       class="fa fa-pencil" aria-hidden="true"></i></a></div>
 
+                      <div ><a *ngIf="part?.part_doc_path?.url!=null" class="Download" matTooltip="Download" (click)="new_download(part.id,part.customername,part.job_name)"><i
+                        class="fa fa-download" aria-hidden="true"></i></a></div>
+
               </td>
+             
 
             </tr>
           </table>

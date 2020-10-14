@@ -211,13 +211,23 @@ h1, h2, h3, h4, h5, h6{
 .table_search{
     float: right;
     margin-left: 10px;
+    margin-top: -5px;
+    ::placeholder {
+        color: #565656;
+        opacity: 1; /* Firefox */
+      }
     .form-control{
-        font-size: 12px!important;
-        border: 1px solid #dee2e6;
+        font-size: 16px !important;
+        border: 1px solid #8c8c8c;
         border-radius: 0;
         padding: 0.375rem 0.75rem;
-        height: 35px; 
+        height: 40px;
+        &:focus{
+            outline: none;
+            box-shadow: unset;
+        }
     }
+    
 }
 .table_export{
     a{
@@ -856,7 +866,7 @@ mat-card-footer{
         display: flex;
         align-items: center;
         a {
-            padding-left:10px;
+            padding-right:17px;
             cursor: pointer;
         }
     }
@@ -867,6 +877,12 @@ mat-card-footer{
         display: flex;
         align-items: inherit;
     }
+}
+
+
+button, select {
+    text-transform: none;
+    cursor: pointer;
 }
 
 

@@ -53,14 +53,14 @@ export class RegisterComponent implements OnInit {
      this.add_val["role_id"] =this.role;
 
     
-     this.login.reset();
+    //  this.login.reset();
      this.register.senddata(this.add_val).subscribe(res =>{
     
        if (res === true) {
         Swal.fire('Thank You for registering with Yantra24x7')
+        this.route.navigateByUrl('');
 
       }
-      this.route.navigateByUrl('');
 
      })
    }
